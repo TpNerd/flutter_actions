@@ -6,26 +6,25 @@ on:
     paths-ignore:
       - '**/README.md'
   workflow_dispatch:
+
 jobs:
   test:
-
     strategy:
       matrix:
         api-level: [28, 29]
         target: [default, google_apis]
     runs-on: macOS-latest
     steps:
-      # A name for your step to display on GitHub.
-      - name: "prepare"
-      - uses: actions/checkout@v1
-      - uses: subosito/flutter-action@v1
-        with:
-          flutter-version: '2.5.0'
-      - name: Run Flutter Driver tests
-        uses: reactivecircus/android-emulator-runner@v1
-        with:
-          api-level: ${{ matrix.api-level }}
-          target: ${{ matrix.target }}
-          arch: x86_64
-          profile: Nexus 6
-          script: flutter drive --target=test_driver/app.dart
+    - name: "prepare"
+    - uses: actions/checkout@v1
+    - uses: subosito/flutter-action@v1
+      with:
+        flutter-version: '2.5.0'
+    - name: Run Flutter Driver tests
+      uses: reactivecircus/android-emulator-runner@v1
+      with:
+        api-level: ${{ matrix.api-level }}
+        target: ${{ matrix.target }}
+        arch: x86_64
+        profile: Nexus 6
+        script: flutter drive --target=test_driver/app.dart
