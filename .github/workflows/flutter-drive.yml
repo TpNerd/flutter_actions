@@ -24,11 +24,11 @@ jobs:
     steps:
     # A name for your step to display on GitHub.
     - name: "List all simulators"
-      run: "xcrun instruments -s"
+      run: "xcrun xctrace"
     - name: "Start Simulator"
       run: |
         UDID=$(
-          xcrun xctrace -s |
+          xcrun xctrace |
           awk \
             -F ' *[][]' \
             -v 'device=${{ matrix.device }}' \
