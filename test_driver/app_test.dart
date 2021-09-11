@@ -13,7 +13,7 @@ void main() {
     });
 
     tearDownAll(() async {
-        driver.close();
+      driver.close();
     });
 
     test('starts at 0', () async {
