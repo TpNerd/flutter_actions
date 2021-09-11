@@ -2,7 +2,12 @@
 name: flutter drive
 
 # Trigger the workflow on push or pull request.
-on: [push, pull_request]
+on:
+  pull_request:
+    branches: [master]
+    paths-ignore:
+      - '**/README.md'
+  workflow_dispatch:
 
 # A workflow run is made up of one or more jobs.
 jobs:
