@@ -21,9 +21,17 @@ jobs:
           flutter-version: ${{ env.FLUTTER_VERSION }}
       - name: Build iOs App
         run: |
-          chmod +x "${GITHUB_WORKSPACE}/.github/build_ios_app.sh"
-              # run script
-          "${GITHUB_WORKSPACE}/.github/build_ios_app.sh"
+          cd ios || return
+          pod install
+          cd ..
+          flutter build ios --no-codesign --dart-define=BASE_URL=${{ secrets.DEV_BASE_URL }} --dart-define=EXEC_ENV='github_actions'
+          cd build/ios/iphoneos || return
+          mkdir Payload
+          cd Payload || return
+          ln -s ../Runner.app .
+          cd ..
+          zip -r app.ipa Payload
+
       - name: Release Apps
         uses: Adapta-dev/release-action@v1
         with:
