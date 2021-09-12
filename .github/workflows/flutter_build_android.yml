@@ -28,7 +28,7 @@ jobs:
       - name: Release Apps
         uses: Adapta-dev/release-action@v1
         with:
-          tag: ${{ env.APP_VERSION }}
-          name: ${{ env.APP_VERSION }}
+          tag: ${{ env.APP_VERSION }}_${{ matrix.target }}_${{ matrix.api-level }}
+          name: ${{ env.APP_VERSION }}_${{ matrix.target }}_${{ matrix.api-level }}
           token: ${{ secrets.GITHUB_TOKEN }}
           artifacts: 'build/app/outputs/apk/release/*.apk'

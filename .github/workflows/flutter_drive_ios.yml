@@ -20,6 +20,8 @@ jobs:
     steps:
     - name: Export Release Timestamp
       run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%m.%S')" >> $GITHUB_ENV
+    - name: Export Device Name
+      run: echo "DEVICE_VERSION=v$(${{ matrix.device }})" >> $GITHUB_ENV
     - name: "List all simulators"
       run: "xcrun instruments -s"
     - name: "Start Simulator"
@@ -47,7 +49,7 @@ jobs:
     - name: Release screenshots
       uses: Adapta-dev/release-action@v1
       with:
-        tag: "${{ env.APP_VERSION }}_${{ matrix.device }}"
-        name: "${{ env.APP_VERSION }}_${{ matrix.device }}"
+        tag: "${{ env.APP_VERSION }}_${{ env.DEVICE_VERSION }}"
+        name: "${{ env.APP_VERSION }}_${{ env.DEVICE_VERSION }}"
         token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: '*.png'
