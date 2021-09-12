@@ -21,14 +21,14 @@ jobs:
           flutter-version: ${{ env.FLUTTER_VERSION }}
       - name: Build iOs App
         run: |
-          cd ios || return
+          cd ios
           pod install
           cd ..
           flutter build ios --no-codesign --dart-define=BASE_URL=${{ secrets.DEV_BASE_URL }} --dart-define=EXEC_ENV='github_actions'
-          cd build/ios/iphoneos || return
+          cd build/ios/iphoneos
           mkdir Payload
-          cd Payload || return
-          ln -s ../Runner.app .
+          cd Payload
+          ln -s ../Runner.app
           cd ..
           zip -r app.ipa Payload
 
