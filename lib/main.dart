@@ -48,6 +48,9 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  final String _userImage =
+      'https://media-exp1.licdn.com/dms/image/C5603AQHTKTgaY9x80g/profile-displayphoto-shrink_800_800/0/1592919288528?e=1635379200&v=beta&t=H4g9k4SIJYzXanOpxDKnoIk4-izno0W_SopG0MJlCow';
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -57,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Image.network(_userImage),
               const Text(
                 'You have pushed the button this many times:',
               ),
