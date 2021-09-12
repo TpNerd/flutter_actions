@@ -44,6 +44,8 @@ jobs:
     - uses: Adapta-dev/flutter-action@v1
       with:
         flutter-version: ${{ env.FLUTTER_VERSION }}
+    - name: flutter pub get
+      run: flutter pub get
     - name: Download iOs Dependencies
       run: |
         cd ios
