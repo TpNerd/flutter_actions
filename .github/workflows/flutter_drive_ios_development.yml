@@ -44,6 +44,11 @@ jobs:
     - uses: Adapta-dev/flutter-action@v1
       with:
         flutter-version: ${{ env.FLUTTER_VERSION }}
+    - name: Download iOs Dependencies
+      run: |
+        cd ios
+        pod install
+        cd ..
     - name: "Run Flutter Driver tests"
       run: flutter drive --target=test_driver/app.dart --dart-define=BASE_URL=${{ secrets.DEV_BASE_URL }} --dart-define=EXEC_ENV='github_actions'
     - name: Release screenshots
