@@ -23,9 +23,6 @@ jobs:
         run: flutter pub get
       - name: Build iOs App
         run: |
-          cd ios
-          pod install
-          cd ..
           flutter build ios --no-codesign --dart-define=BASE_URL=${{ secrets.DEV_BASE_URL }} --dart-define=EXEC_ENV='github_actions'
           cd build/ios/iphoneos
           mkdir Payload
