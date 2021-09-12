@@ -18,6 +18,8 @@ jobs:
       JAVA_VERSION: '12.x'
       FLUTTER_VERSION: '2.5.0'
     steps:
+    - name: Export Release Timestamp
+      run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%m.%S')" >> $GITHUB_ENV
     - name: "List all simulators"
       run: "xcrun instruments -s"
     - name: "Start Simulator"
@@ -42,3 +44,10 @@ jobs:
         flutter-version: ${{ env.FLUTTER_VERSION }}
     - name: "Run Flutter Driver tests"
       run: flutter drive --target=test_driver/app.dart --dart-define=BASE_URL=${{ secrets.DEV_BASE_URL }} --dart-define=EXEC_ENV='github_actions'
+    - name: Release screenshots
+      uses: Adapta-dev/release-action@v1
+      with:
+        tag: ${{ env.APP_VERSION }}
+        name: ${{ env.APP_VERSION }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        artifacts: '*.png'
