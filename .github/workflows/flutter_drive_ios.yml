@@ -1,10 +1,6 @@
 name: flutter drive ios
 
 on:
-  pull_request:
-    branches: [master]
-    paths-ignore:
-      - '**/README.md'
   workflow_dispatch:
 
 jobs:
@@ -18,6 +14,9 @@ jobs:
       # fails.
       fail-fast: false
     runs-on: macOS-latest
+    env:
+      JAVA_VERSION: '12.x'
+      FLUTTER_VERSION: '2.5.0'
     steps:
     - name: "List all simulators"
       run: "xcrun instruments -s"
@@ -34,12 +33,12 @@ jobs:
         xcrun simctl boot "${UDID:?No Simulator with this name found}"
     # The branch or tag ref that triggered the workflow will be checked out.
     # https://github.com/actions/checkout
-    - uses: actions/checkout@v1
-    - uses: subosito/flutter-action@v1
+    - uses: Adapta-dev/checkout@v2
+    - uses: Adapta-dev/setup-java@v1
       with:
-        flutter-version: '2.5.0'
+        java-version: ${{ env.JAVA_VERSION }}
+    - uses: Adapta-dev/flutter-action@v1
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
     - name: "Run Flutter Driver tests"
-      run: "flutter drive --target=test_driver/app.dart"
-      env:
-        BASE_URL: ${{ secrets.DEV_BASE_URL }}
-        EXEC_ENV: 'github_actions'
+      run: flutter drive --target=test_driver/app.dart --dart-define=BASE_URL=${{ secrets.DEV_BASE_URL }} --dart-define=EXEC_ENV='github_actions'
