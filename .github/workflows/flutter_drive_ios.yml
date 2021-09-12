@@ -47,7 +47,7 @@ jobs:
     - name: Release screenshots
       uses: Adapta-dev/release-action@v1
       with:
-        tag: ${{ env.APP_VERSION }} ${{ matrix.device }}
-        name: ${{ env.APP_VERSION }} ${{ matrix.device }}
+        tag: ${{ env.APP_VERSION }}_${{ matrix.device }}
+        name: ${{ env.APP_VERSION }}_${{ matrix.device }}
         token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: '*.png'
