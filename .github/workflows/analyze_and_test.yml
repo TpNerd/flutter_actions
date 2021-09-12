@@ -1,0 +1,34 @@
+name: analyze and test
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - '**/README.md'
+  pull_request:
+    branches: [master]
+    paths-ignore:
+      - '**/README.md'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: flutter test
+    runs-on: ubuntu-latest
+    env:
+      JAVA_VERSION: '12.x'
+      FLUTTER_VERSION: '2.5.0'
+    steps:
+      - uses: Adapta-dev/checkout@v2
+      - uses: Adapta-dev/setup-java@v1
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+      - uses: Adapta-dev/flutter-action@v1
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
+        env:
+          BASE_URL: ${{ secrets.DEV_BASE_URL }}
+          EXEC_ENV: 'github_actions'

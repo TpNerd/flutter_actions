@@ -17,12 +17,12 @@ void main() {
     });
 
     test('starts at 0', () async {
-      expect(await driver.getText(counterTextFinder), "0");
+      expect(await driver.getText(counterTextFinder), '0');
     });
 
     test('increments the counter', () async {
       await driver.tap(buttonFinder);
-      expect(await driver.getText(counterTextFinder), "1");
+      expect(await driver.getText(counterTextFinder), '1');
     });
   });
 }
