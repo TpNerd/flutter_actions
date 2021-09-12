@@ -9,10 +9,6 @@ jobs:
     env:
       JAVA_VERSION: '12.x'
       FLUTTER_VERSION: '2.5.0'
-    strategy:
-      matrix:
-        api-level: [21, 29]
-        target: [default, google_apis]
     steps:
       - name: Export Release Timestamp
         run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%m.%S')" >> $GITHUB_ENV
@@ -28,7 +24,7 @@ jobs:
       - name: Release Apps
         uses: Adapta-dev/release-action@v1
         with:
-          tag: ${{ env.APP_VERSION }}_${{ matrix.target }}_${{ matrix.api-level }}
-          name: ${{ env.APP_VERSION }}_${{ matrix.target }}_${{ matrix.api-level }}
+          tag: ${{ env.APP_VERSION }}
+          name: ${{ env.APP_VERSION }}
           token: ${{ secrets.GITHUB_TOKEN }}
           artifacts: 'build/app/outputs/apk/release/*.apk'
