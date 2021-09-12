@@ -1,0 +1,34 @@
+name: flutter drive android
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: macos-latest
+    env:
+      JAVA_VERSION: '12.x'
+      FLUTTER_VERSION: '2.5.0'
+    strategy:
+      matrix:
+        api-level: [21, 29]
+        target: [default, google_apis]
+    steps:
+      - name: Export Release Timestamp
+        run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%m.%S')" >> $GITHUB_ENV
+      - uses: Adapta-dev/checkout@v2
+      - uses: Adapta-dev/setup-java@v1
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+      - uses: Adapta-dev/flutter-action@v1
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+      - name: Build Android App
+        run: flutter build apk --obfuscate --split-debug-info=./hello_adapta/symbols --dart-define=BASE_URL=${{ secrets.DEV_BASE_URL }} --dart-define=EXEC_ENV='github_actions'
+      - name: Release Apps
+        uses: Adapta-dev/release-action@v1
+        with:
+          tag: ${{ env.APP_VERSION }}
+          name: ${{ env.APP_VERSION }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: 'build/app/outputs/apk/release/*.apk'
