@@ -1,10 +1,10 @@
-name: flutter drive ios
+name: drive ios development
 
 on:
   workflow_dispatch:
 
 jobs:
-  drive:
+  drive_ios_development:
     strategy:
       matrix:
         device:

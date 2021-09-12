@@ -4,17 +4,18 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_android:
+  drive_android_development:
     runs-on: ubuntu-latest
     env:
       JAVA_VERSION: '12.x'
       FLUTTER_VERSION: '2.5.0'
-      APP_VERSION: 'v$(date +"%Y.%m.%d.%H.%m.%S")'
     strategy:
       matrix:
         api-level: [21, 29]
         target: [default, google_apis]
     steps:
+      - name: Export Release Timestamp
+        run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%m.%S')" >> $GITHUB_ENV
       - uses: Adapta-dev/checkout@v2
       - uses: Adapta-dev/setup-java@v1
         with:

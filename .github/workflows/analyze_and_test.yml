@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    name: flutter test
+  test:
+    name: analyze and test
     runs-on: ubuntu-latest
     env:
       JAVA_VERSION: '12.x'
