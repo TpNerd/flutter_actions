@@ -17,7 +17,7 @@ jobs:
     env:
       JAVA_VERSION: '12.x'
       FLUTTER_VERSION: '2.5.0'
-      DEVICE_VERSION: ${{ toJSON(matrix.device) }}
+      DEVICE_VERSION: ${{ matrix.device // /_ }}
     steps:
     - name: Export Release Timestamp
       run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%m.%S')" >> $GITHUB_ENV
