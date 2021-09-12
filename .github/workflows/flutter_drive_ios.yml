@@ -20,8 +20,10 @@ jobs:
     steps:
     - name: Export Release Timestamp
       run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%m.%S')" >> $GITHUB_ENV
+    - name: format Device Name
+      run: echo "FORMATTED_STRING=format('${{ matrix.device }}',' ','_') }" >> $GITHUB_ENV
     - name: Export Device Name
-      run: echo "DEVICE_VERSION=${{format('${{ matrix.device }}',' ','_') }}" >> $GITHUB_ENV
+      run: echo "DEVICE_VERSION=${{ env.FORMATTED_STRING }}" >> $GITHUB_ENV
     - name: "List all simulators"
       run: "xcrun instruments -s"
     - name: "Start Simulator"
