@@ -26,7 +26,4 @@ jobs:
           target: ${{ matrix.target }}
           arch: x86_64
           profile: Nexus 6
-          script: flutter drive --target=test_driver/app.dart
-          env:
-            BASE_URL: ${{ secrets.DEV_BASE_URL }}
-            EXEC_ENV: 'github_actions'
+          script: flutter drive --target=test_driver/app.dart --dart-define=${{ secrets.DEV_BASE_URL }} --dart-define=EXEC_ENV='github_actions'
