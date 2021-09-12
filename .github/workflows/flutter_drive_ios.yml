@@ -17,10 +17,11 @@ jobs:
     env:
       JAVA_VERSION: '12.x'
       FLUTTER_VERSION: '2.5.0'
-      DEVICE_VERSION: ${{ matrix.device // /_ }}
     steps:
     - name: Export Release Timestamp
       run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%m.%S')" >> $GITHUB_ENV
+    - name: Export Device Name
+      run: echo "DEVICE_VERSION=${{ matrix.device }}" | tr ' ' '_' >> $GITHUB_ENV
     - name: "List all simulators"
       run: "xcrun instruments -s"
     - name: "Start Simulator"
