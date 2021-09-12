@@ -25,4 +25,4 @@ jobs:
           api-level: ${{ matrix.api-level }}
           target: ${{ matrix.target }}
           profile: pixel
-          script: flutter drive --target=test_driver/app.dart --dart-define=${{ secrets.DEV_BASE_URL }} --dart-define=EXEC_ENV='github_actions'
+          script: flutter drive --target=test_driver/app.dart --dart-define=BASE_URL=${{ secrets.DEV_BASE_URL }} --dart-define=EXEC_ENV='github_actions'
