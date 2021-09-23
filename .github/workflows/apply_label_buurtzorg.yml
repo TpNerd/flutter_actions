@@ -25,7 +25,7 @@ jobs:
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
       - name: apply hello_buurtzorg
-        run: ./generate_label_files.sh ${{ LABEL_NAME }} "${{ LABEL }}"
+        run: ./generate_label_files.sh ${{ env.LABEL_NAME }} "${{ env.LABEL }}"
       - name: Build Android App
         run: flutter build apk --obfuscate --split-debug-info=./hello_adapta/symbols --dart-define=BASE_URL=${{ secrets.DEV_BASE_URL }} --dart-define=EXEC_ENV='github_actions' --dart-define=LABEL='hello_buurtzorg'
       - name: Release Apps
