@@ -1,0 +1,106 @@
+{
+  "label": "Hello Buurtzorg",
+  "main_color": "0xff1a67cf",
+  "spacingXXLarge": 48.0,
+  "spacingXLarge": 32.0,
+  "spacingLarge": 20.0,
+  "spacingDefault": 16.0,
+  "spacingSmall": 8.0,
+  "spacingXSmall": 4.0,
+  "light": {
+    "base_background_color": "0xffffffff",
+    "base_color": "0xff000000",
+    "primary_color": "0xff1a67cf",
+    "secondary_color1": "0xfffddd0e",
+    "secondary_color2": "0xff46e54c",
+    "button_color": "0xff1a67cf",
+    "button_text_color": "0xffffffff",
+    "disabled_button_color": "0xffffffff",
+    "disabled_button_text_color": "0xff353535",
+    "font_family": "Roboto",
+    "title": {
+      "fontsize": 20,
+      "weight": "Regular",
+      "line_spacing": 29,
+      "char_spacing": 0
+    },
+    "body1": {
+      "fontsize": 14,
+      "weight": "Bold",
+      "line_spacing": 22,
+      "char_spacing": 0
+    },
+    "body2": {
+      "fontsize": 12,
+      "weight": "Regular",
+      "line_spacing": 22,
+      "char_spacing": 0
+    },
+    "paragraph1": {
+      "fontsize": 14,
+      "weight": "Regular",
+      "line_spacing": 22,
+      "char_spacing": 0
+    },
+    "paragraph2": {
+      "fontsize": 14,
+      "weight": "Bold",
+      "line_spacing": 20,
+      "char_spacing": 0
+    },
+    "button": {
+      "fontsize": 14,
+      "weight": "Bold",
+      "line_spacing": 20,
+      "char_spacing": 0
+    }
+  },
+  "dark": {
+    "base_background_color": "0xff121212",
+    "base_color": "0xffffffff",
+    "primary_color": "0xff353535",
+    "secondary_color1": "0xff1a67cf",
+    "secondary_color2": "0xffffffff",
+    "button_color": "0xff1a67cf",
+    "button_text_color": "0xffffffff",
+    "disabled_button_color": "0xff353535",
+    "disabled_button_text_color": "0xff1d1d1d",
+    "font_family": "Roboto",
+    "title": {
+      "fontsize": 20,
+      "weight": "Regular",
+      "line_spacing": 29,
+      "char_spacing": 0
+    },
+    "body1": {
+      "fontsize": 14,
+      "weight": "Bold",
+      "line_spacing": 22,
+      "char_spacing": 0
+    },
+    "body2": {
+      "fontsize": 12,
+      "weight": "Regular",
+      "line_spacing": 22,
+      "char_spacing": 0
+    },
+    "paragraph1": {
+      "fontsize": 14,
+      "weight": "Regular",
+      "line_spacing": 22,
+      "char_spacing": 0
+    },
+    "paragraph2": {
+      "fontsize": 14,
+      "weight": "Bold",
+      "line_spacing": 20,
+      "char_spacing": 0
+    },
+    "button": {
+      "fontsize": 14,
+      "weight": "Bold",
+      "line_spacing": 20,
+      "char_spacing": 0
+    }
+  }
+}

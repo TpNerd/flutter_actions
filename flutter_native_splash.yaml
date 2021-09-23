@@ -1,0 +1,10 @@
+flutter_native_splash:
+  android_gravity: center
+  ios_content_mode: scaleAspectFit
+
+  image: assets/images/splash-logo.png
+  background_image: assets/images/Background.png
+
+  background_image_dark: assets/images/Background-dark.png
+  image_dark: assets/images/splash-logo-dark.png
+  fullscreen: true

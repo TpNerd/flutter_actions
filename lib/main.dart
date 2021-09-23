@@ -61,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Text(String.fromEnvironment('BASE_URL')),
+              const Text(String.fromEnvironment('LABEL')),
               Image.network(_userImage),
               const Text(
                 'You have pushed the button this many times:',
