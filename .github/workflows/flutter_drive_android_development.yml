@@ -45,4 +45,4 @@ jobs:
           tag: "${{ env.APP_VERSION }}_${{ matrix.target }}_${{ matrix.api-level }}"
           name: "${{ env.APP_VERSION }}_${{ matrix.target }}_${{ matrix.api-level }}_${{ env.LABEL_NAME }}"
           token: ${{ env.GITHUB_TOKEN }}
-          artifacts: ${{ env.ARTIFACTS }
+          artifacts: ${{ env.ARTIFACTS }}
