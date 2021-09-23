@@ -17,6 +17,8 @@ jobs:
       GITHUB_ACTION_NAME: 'github_actions'
       ARTIFACTS: 'build/app/outputs/apk/release/*.apk'
     steps:
+      - name: Export Release Timestamp
+        run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%m.%S')" >> $GITHUB_ENV
       - uses: Adapta-Innovation/checkout@v2
       - uses: Adapta-Innovation/setup-java@v1
         with:
