@@ -28,7 +28,9 @@ void main() async {
       app.main();
       await tester.pumpAndSettle();
 
-      await binding.takeScreenshot('1-home-$platformName');
+      if (Platform.isAndroid) {
+        await binding.takeScreenshot('1-home-$platformName');
+      }
       expect(find.textContaining('pushed'), findsOneWidget);
     });
   });
