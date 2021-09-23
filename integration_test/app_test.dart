@@ -11,7 +11,7 @@ void main() async {
       IntegrationTestWidgetsFlutterBinding();
 
   group('end-to-end test', () {
-    testWidgets('tap on the login button; verify main page appearing',
+    testWidgets('just check if pushed text is on screen',
         (WidgetTester tester) async {
       String platformName = '';
       if (!kIsWeb) {
@@ -29,7 +29,7 @@ void main() async {
       await tester.pumpAndSettle();
 
       await binding.takeScreenshot('1-home-$platformName');
-      expect(find.text('pressed'), findsOneWidget);
+      expect(find.text('pushed'), findsOneWidget);
     });
   });
 }
