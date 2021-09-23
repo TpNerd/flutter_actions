@@ -1,4 +1,4 @@
-name: drive android development
+name: drive android development - Buurtzorg
 
 on:
   workflow_dispatch:
@@ -9,6 +9,13 @@ jobs:
     env:
       JAVA_VERSION: '12.x'
       FLUTTER_VERSION: '2.5.0'
+      LABEL_NAME: 'hello_buurtzorg'
+      LABEL_TEXT: 'Buurtzorg'
+      GOOGLE_CHAT_WEBHOOK: ${{ secrets.DEMO_GOOGLE_CHAT_WEBHOOK }}
+      DEMO_BASE_URL: ${{ secrets.DEMO_BASE_URL }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_ACTION_NAME: 'github_actions'
+      ARTIFACTS: 'screenshots/*.png'
     strategy:
       matrix:
         api-level: [21, 29]
@@ -16,24 +23,26 @@ jobs:
     steps:
       - name: Export Release Timestamp
         run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%m.%S')" >> $GITHUB_ENV
-      - uses: Adapta-dev/checkout@v2
-      - uses: Adapta-dev/setup-java@v1
+      - uses: Adapta-Innovation/checkout@v2
+      - uses: Adapta-Innovation/setup-java@v1
         with:
           java-version: ${{ env.JAVA_VERSION }}
-      - uses: Adapta-dev/flutter-action@v1
+      - uses: Adapta-Innovation/flutter-action@v1
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
+      - name: Apply Label
+        run: sh ./generate_label_files.sh ${{ env.LABEL_NAME }} "${{ env.LABEL_TEXT }}"
       - name: Run Flutter Driver tests
-        uses: reactivecircus/android-emulator-runner@v2
+        uses: Adapta-Innovation/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
           target: ${{ matrix.target }}
           profile: pixel
-          script: flutter drive --target=test_driver/app.dart --dart-define=BASE_URL=${{ secrets.DEV_BASE_URL }} --dart-define=EXEC_ENV='github_actions'
+          script: flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart --dart-define=BASE_URL=${{ env.DEMO_BASE_URL }} --dart-define=EXEC_ENV=${{ env.GITHUB_ACTION_NAME }} --dart-define=LABEL=${{ env.LABEL_NAME }}
       - name: Release screenshots
-        uses: Adapta-dev/release-action@v1
+        uses: Adapta-Innovation/release-action@v1
         with:
-          tag: ${{ env.APP_VERSION }}_${{ matrix.target }}_${{ matrix.api-level }}
-          name: ${{ env.APP_VERSION }}_${{ matrix.target }}_${{ matrix.api-level }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: '*.png'
+          tag: "${{ env.APP_VERSION }}_${{ matrix.target }}_${{ matrix.api-level }}"
+          name: "${{ env.APP_VERSION }}_${{ matrix.target }}_${{ matrix.api-level }}_${{ env.LABEL_NAME }}"
+          token: ${{ env.GITHUB_TOKEN }}
+          artifacts: ${{ env.ARTIFACTS }

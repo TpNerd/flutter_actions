@@ -1,4 +1,4 @@
-name: drive ios development
+name: drive ios development - Buurtzorg
 
 on:
   workflow_dispatch:
@@ -17,6 +17,13 @@ jobs:
     env:
       JAVA_VERSION: '12.x'
       FLUTTER_VERSION: '2.5.0'
+      LABEL_NAME: 'hello_buurtzorg'
+      LABEL_TEXT: 'Buurtzorg'
+      GOOGLE_CHAT_WEBHOOK: ${{ secrets.DEMO_GOOGLE_CHAT_WEBHOOK }}
+      DEMO_BASE_URL: ${{ secrets.DEMO_BASE_URL }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_ACTION_NAME: 'github_actions'
+      ARTIFACTS: 'screenshots/*.png'
     steps:
     - name: Export Release Timestamp
       run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%m.%S')" >> $GITHUB_ENV
@@ -37,21 +44,23 @@ jobs:
         xcrun simctl boot "${UDID:?No Simulator with this name found}"
     # The branch or tag ref that triggered the workflow will be checked out.
     # https://github.com/actions/checkout
-    - uses: Adapta-dev/checkout@v2
-    - uses: Adapta-dev/setup-java@v1
+    - uses: Adapta-Innovation/checkout@v2
+    - uses: Adapta-Innovation/setup-java@v1
       with:
         java-version: ${{ env.JAVA_VERSION }}
-    - uses: Adapta-dev/flutter-action@v1
+    - uses: Adapta-Innovation/flutter-action@v1
       with:
         flutter-version: ${{ env.FLUTTER_VERSION }}
     - name: flutter pub get
       run: flutter pub get
+    - name: Apply Label
+      run: sh ./generate_label_files.sh ${{ env.LABEL_NAME }} "${{ env.LABEL_TEXT }}"
     - name: "Run Flutter Driver tests"
-      run: flutter drive --target=test_driver/app.dart --dart-define=BASE_URL=${{ secrets.DEV_BASE_URL }} --dart-define=EXEC_ENV='github_actions'
+      run: flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart --dart-define=BASE_URL=${{ env.DEMO_BASE_URL }} --dart-define=EXEC_ENV=${{ env.GITHUB_ACTION_NAME }} --dart-define=LABEL=${{ env.LABEL_NAME }}
     - name: Release screenshots
-      uses: Adapta-dev/release-action@v1
+      uses: Adapta-Innovation/release-action@v1
       with:
         tag: "${{ env.APP_VERSION }}_${{ env.DEVICE_VERSION }}"
-        name: "${{ env.APP_VERSION }}_${{ env.DEVICE_VERSION }}"
-        token: ${{ secrets.GITHUB_TOKEN }}
-        artifacts: '*.png'
+        name: "${{ env.APP_VERSION }}_${{ env.DEVICE_VERSION }}_${{ env.LABEL_NAME }}"
+        token: ${{ env.GITHUB_TOKEN }}
+        artifacts: ${{ env.ARTIFACTS }}
