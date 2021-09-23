@@ -1,4 +1,4 @@
-name: apply buurtzorg label and build android development
+name: apply adapta label and build android development
 
 on:
   workflow_dispatch:
@@ -9,8 +9,8 @@ jobs:
     env:
       JAVA_VERSION: '12.x'
       FLUTTER_VERSION: '2.5.0'
-      LABEL_NAME: 'hello_buurtzorg'
-      LABEL: 'Hello Buurtzorg'
+      LABEL_NAME: 'hello_adapta'
+      LABEL: 'Hello Adapta'
       GOOGLE_CHAT_WEBHOOK: ${{ secrets.DEMO_GOOGLE_CHAT_WEBHOOK }}
       DEMO_BASE_URL: ${{ secrets.DEMO_BASE_URL }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -34,6 +34,6 @@ jobs:
         uses: Adapta-dev/release-action@v1
         with:
           tag: ${{ env.APP_VERSION }}
-          name: ${{ env.APP_VERSION }}_buurtzorg
+          name: ${{ env.APP_VERSION }}_adapta
           token: ${{ secrets.GITHUB_TOKEN }}
           artifacts: 'build/app/outputs/apk/release/*.apk'
