@@ -29,7 +29,7 @@ void main() async {
       await tester.pumpAndSettle();
 
       await binding.takeScreenshot('1-home-$platformName');
-      expect(find.text('pushed'), findsOneWidget);
+      expect(find.textContaining('pushed'), findsOneWidget);
     });
   });
 }
