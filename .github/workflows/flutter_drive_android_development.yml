@@ -17,6 +17,8 @@ jobs:
       GITHUB_ACTION_NAME: 'github_actions'
       ARTIFACTS: 'screenshots/*.*'
     strategy:
+      fail-fast: false
+      max-parallel: 1
       matrix:
         api-level: [21, 29]
         target: [default]
