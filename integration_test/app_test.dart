@@ -25,8 +25,8 @@ void main() async {
         platformName = 'web';
       }
 
-      await app.main();
-      await tester.pumpAndSettle();
+      app.main();
+      await tester.pump(const Duration(seconds: 10));
 
       if (Platform.isAndroid) {
         await binding.takeScreenshot('1-home-$platformName');

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-Future<void> main() async {
+void main() {
   String? platformBaseUrl = Platform.environment['BASE_URL'];
   String? platExec = Platform.environment['EXEC_ENV'];
 
