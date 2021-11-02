@@ -15,7 +15,7 @@ jobs:
       DEMO_BASE_URL: ${{ secrets.DEMO_BASE_URL }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       GITHUB_ACTION_NAME: 'github_actions'
-      ARTIFACTS: 'screenshots/*.*'
+      ARTIFACTS: 'screenshots/*.png'
     strategy:
       fail-fast: false
       max-parallel: 1
@@ -34,17 +34,13 @@ jobs:
           flutter-version: ${{ env.FLUTTER_VERSION }}
       - name: Apply Label
         run: sh ./generate_label_files.sh ${{ env.LABEL_NAME }} "${{ env.LABEL_TEXT }}"
-      - name: create output folder
-        run: mkdir screenshots
-      - name: create log file
-        run: touch screenshots/log.txt
       - name: Run Flutter Driver tests
         uses: Adapta-Innovation/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
           target: ${{ matrix.target }}
           profile: pixel
-          script: flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart --dart-define=BASE_URL=${{ env.DEMO_BASE_URL }} --dart-define=EXEC_ENV=${{ env.GITHUB_ACTION_NAME }} --dart-define=LABEL=${{ env.LABEL_NAME }} > screenshots/log.txt
+          script: flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart --dart-define=BASE_URL=${{ env.DEMO_BASE_URL }} --dart-define=EXEC_ENV=${{ env.GITHUB_ACTION_NAME }} --dart-define=LABEL=${{ env.LABEL_NAME }}
       - name: Release screenshots
         uses: Adapta-Innovation/release-action@v1
         with:
