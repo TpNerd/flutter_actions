@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: ${{ env.JAVA_VERSION }}
-      - uses: actions/flutter-action@v1
+      - uses: subosito/flutter-action@v1
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
       - name: Apply Label
@@ -40,7 +40,7 @@ jobs:
           cd ..
           zip -r app.ipa Payload
       - name: Release Apps
-        uses: actions/release-action@v1
+        uses: ncipollo/release-action@v1
         with:
           tag: "${{ env.APP_VERSION }}"
           name: "${{ env.APP_VERSION }}_${{ env.LABEL_NAME }}"
