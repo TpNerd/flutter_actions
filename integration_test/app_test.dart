@@ -25,7 +25,7 @@ void main() async {
         platformName = 'web';
       }
 
-      app.main();
+      await app.main();
       await tester.pumpAndSettle();
 
       if (Platform.isAndroid) {
