@@ -44,11 +44,11 @@ jobs:
         xcrun simctl boot "${UDID:?No Simulator with this name found}"
     # The branch or tag ref that triggered the workflow will be checked out.
     # https://github.com/actions/checkout
-    - uses: Adapta-Innovation/checkout@v2
-    - uses: Adapta-Innovation/setup-java@v1
+    - uses: actions/checkout@v2
+    - uses: actions/setup-java@v1
       with:
         java-version: ${{ env.JAVA_VERSION }}
-    - uses: Adapta-Innovation/flutter-action@v1
+    - uses: actions/flutter-action@v1
       with:
         flutter-version: ${{ env.FLUTTER_VERSION }}
     - name: flutter pub get
@@ -58,7 +58,7 @@ jobs:
     - name: "Run Flutter Driver tests"
       run: flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart --dart-define=BASE_URL=${{ env.DEMO_BASE_URL }} --dart-define=EXEC_ENV=${{ env.GITHUB_ACTION_NAME }} --dart-define=LABEL=${{ env.LABEL_NAME }}
     - name: Release screenshots
-      uses: Adapta-Innovation/release-action@v1
+      uses: actions/release-action@v1
       with:
         tag: "${{ env.APP_VERSION }}_${{ env.DEVICE_VERSION }}"
         name: "${{ env.APP_VERSION }}_${{ env.DEVICE_VERSION }}_${{ env.LABEL_NAME }}"
