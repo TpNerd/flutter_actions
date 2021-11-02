@@ -43,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
+    print('incrementing');
     setState(() {
       _counter++;
     });
