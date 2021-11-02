@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         api-level: [21, 29]
-        target: [google_apis]
+        target: [default]
     steps:
       - name: Export Release Timestamp
         run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%m.%S')" >> $GITHUB_ENV
