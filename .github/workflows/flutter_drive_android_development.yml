@@ -18,8 +18,8 @@ jobs:
       ARTIFACTS: 'screenshots/*.png'
     strategy:
       matrix:
-        api-level: [21, 29]
-        target: [default, google_apis]
+        api-level: [27, 28]
+        target: [google_apis]
     steps:
       - name: Export Release Timestamp
         run: echo "APP_VERSION=v$(date +'%Y.%m.%d.%H.%m.%S')" >> $GITHUB_ENV
