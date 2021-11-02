@@ -34,6 +34,10 @@ jobs:
           flutter-version: ${{ env.FLUTTER_VERSION }}
       - name: Apply Label
         run: sh ./generate_label_files.sh ${{ env.LABEL_NAME }} "${{ env.LABEL_TEXT }}"
+      - name: create output folder
+        run: mkdir screenshots
+      - name: create log file
+        run: touch screenshots/log.txt
       - name: Run Flutter Driver tests
         uses: Adapta-Innovation/android-emulator-runner@v2
         with:
